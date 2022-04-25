@@ -1,0 +1,74 @@
+Brevard:
+  row_start: 
+  row_end: 
+  search: False
+
+Broward:
+  row_start: 
+  row_end: 
+  search: False
+
+Duval:
+  row_start: 
+  row_end: 
+  search: False
+
+Hillsborough:
+  row_start: 
+  row_end: 
+  search: False
+
+Lee:
+  row_start: 
+  row_end: 
+  search: False
+
+Marion:
+  row_start: 
+  row_end: 
+  search: False
+
+Miami-Dade: 
+  row_start: 
+  row_end: 
+  search: False
+
+Orange:
+  row_start: 
+  row_end: 
+  search: False
+
+Osceola:
+  row_start: 
+  row_end: 
+  search: False
+
+Palm Beach:
+  row_start: 
+  row_end: 
+  search: False
+
+Pasco:
+  row_start: 
+  row_end: 
+  search: False
+
+Polk:
+  row_start: 
+  row_end: 
+  search: False
+
+Saint Lucie:
+  row_start: 
+  row_end: 
+  search: False
+
+Sarasota:
+  row_start: 
+  row_end: 
+  search: False
+
+Volusia:
+  row_start: 
+  row_end: 
+  search: False
