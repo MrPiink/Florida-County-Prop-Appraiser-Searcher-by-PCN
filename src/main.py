@@ -1,4 +1,5 @@
 from itertools import count
+from re import M
 import yaml  # pip install pyyaml
 from counties import Counties
 
@@ -237,6 +238,21 @@ def main():
         )
 
         sarasota.start()
+
+    if county_settings["Seminole"]["search"]:
+
+        seminole = Counties(
+            "Seminole",
+            "https://scpafl.org/",
+            county_settings["Seminole"]["row_start"],
+            county_settings["Seminole"]["row_end"],
+            "logs/full logs/seminole_log_file.txt",
+            "logs/success logs/seminole_log_file.txt",
+            "#dnn_ctr443_View_txtParcel_I",
+            is_seminole=True
+        )
+
+        seminole.start()
 
     if county_settings["Volusia"]["search"]:
 
