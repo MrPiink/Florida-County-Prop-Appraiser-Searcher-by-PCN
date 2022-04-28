@@ -68,6 +68,11 @@ Sarasota:
   row_end: 
   search: False
 
+Seminole:
+  row_start: 
+  row_end: 
+  search: False
+
 Volusia:
   row_start: 
   row_end: 
