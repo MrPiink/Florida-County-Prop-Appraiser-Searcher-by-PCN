@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 from openpyxl.styles import PatternFill  # pip install openpyxl
-from constants import DRIVER_PATH, EXCEL_FILE_LOCATION, WB, WS
+from constants import DRIVER_PATH, USER_AGENT, EXCEL_FILE_LOCATION, WB, WS
 
 
 class Counties:
@@ -42,6 +42,7 @@ class Counties:
         is_polk=False,
         is_saint_lucie=False,
         is_sarasota=False,
+        is_seminole=False,
         is_volusia=False,
         is_by_class=False
     ):
@@ -73,6 +74,7 @@ class Counties:
         self.is_polk = is_polk
         self.is_saint_lucie = is_saint_lucie
         self.is_sarasota = is_sarasota
+        self.is_seminole = is_seminole
         self.is_volusia = is_volusia
         self.is_by_class = is_by_class
 
@@ -527,6 +529,20 @@ class Counties:
             owner_names_dict[row] = "NAME ERROR"
             return 0
 
+    def get_owners_seminole(self, driver, owner_names_dict, row):
+        try:
+            owner_names = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located(
+                    (By.CSS_SELECTOR, "#ctl00_Content_cellOwner2"))
+            )
+            owner_names_dict[row] = owner_names.text
+            return 1
+
+        except TimeoutException:
+            driver.quit()
+            owner_names_dict[row] = "NAME ERROR"
+            return 0
+
     def get_owners_volusia(self, driver, owner_names_dict, row):
         try:
             owner_names = WebDriverWait(driver, 10).until(
@@ -550,9 +566,8 @@ class Counties:
             options = webdriver.ChromeOptions()
             # Removes constant webdriver logging.
             options.add_argument("--log-level=3")
-            if not self.is_orange:
-                # Orange county cannot be run in headless mode.
-                options.add_argument("headless")
+            options.add_argument("headless")
+            options.add_argument(f"user-agent={USER_AGENT}")
             driver = webdriver.Chrome(DRIVER_PATH, options=options)
             driver.get(self.appraiser_url)
             # Lee and Saint Lucie county open new tabs during website navigation. This gets the current tab.
@@ -626,7 +641,7 @@ class Counties:
                 result = self.get_owners_orange(
                     driver, owner_names_dict, row)
 
-            elif self.is_osceola and result ==1:
+            elif self.is_osceola and result == 1:
                 result = self.get_owners_osceola(
                     driver, owner_names_dict, row)
 
@@ -656,6 +671,11 @@ class Counties:
 
             elif self.is_sarasota and result == 1:
                 result = self.get_owners_sarasota(
+                    driver, owner_names_dict, row
+                )
+
+            elif self.is_seminole and result == 1:
+                result = self.get_owners_seminole(
                     driver, owner_names_dict, row
                 )
 
